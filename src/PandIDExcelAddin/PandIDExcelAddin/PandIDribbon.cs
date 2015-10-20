@@ -18,10 +18,12 @@ namespace PandIDExcelAddin
             fillLabel(ref labelCustomer, "SELECT customer FROM projects where number=" + selectedItem.Label);
             fillLabel(ref labelClass, "SELECT classsoc FROM projects where number=" + selectedItem.Label);
             fillRibonDropDown(ref dropDownFluid, "SELECT DISTINCT type FROM pandid.diagrams ORDER BY type ASC", "type");
+            fillRibonDropDown(ref dropDownType, "SELECT DISTINCT Type FROM pandid.complookup ORDER BY Type ASC", "Type");
         }
 
         private void fillRibonDropDown(ref RibbonDropDown rbControl, string query, string col)
         {
+            rbControl.Items.Clear();
             using (var connection = new MySqlConnection(Properties.Settings.Default.pandidConnectionString))
             {
                 connection.Open();
@@ -35,8 +37,15 @@ namespace PandIDExcelAddin
                             while (reader.Read())
                             {
                                 RibbonDropDownItem item = Globals.Factory.GetRibbonFactory().CreateRibbonDropDownItem();
-                                item.Label = reader.GetString(col);
-                                rbControl.Items.Add(item);
+                                try
+                                {
+                                    item.Label = reader.GetString(col);
+                                    rbControl.Items.Add(item);
+                                }
+                                catch (System.Data.SqlTypes.SqlNullValueException ex)
+                                {
+                                    //item.Label = "None";
+                                }
                             }
                         }
                     }
@@ -102,10 +111,14 @@ namespace PandIDExcelAddin
                     }
                 }
             }
-
-            
-
         }
 
+        private void dropDownType_SelectionChanged(object sender, RibbonControlEventArgs e)
+        {
+            RibbonDropDown rb = (RibbonDropDown)sender;
+            string searchstr = rb.SelectedItem.Label;
+
+            fillRibonDropDown(ref dropDownComponent, "SELECT DISTINCT SuppCode FROM pandid.complookup WHERE Type LIKE \'" + searchstr + "%\' ORDER BY SuppCode ASC", "SuppCode");
+        }
     }
 }

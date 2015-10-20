@@ -51,10 +51,10 @@
             this.dropDownDia = this.Factory.CreateRibbonDropDown();
             this.editBoxLength = this.Factory.CreateRibbonEditBox();
             this.editBoxHeight = this.Factory.CreateRibbonEditBox();
-            this.buttonAddPipe = this.Factory.CreateRibbonButton();
             this.Valves = this.Factory.CreateRibbonGroup();
             this.dropDownType = this.Factory.CreateRibbonDropDown();
             this.dropDownComponent = this.Factory.CreateRibbonDropDown();
+            this.buttonAddPipe = this.Factory.CreateRibbonButton();
             this.buttonAddComp = this.Factory.CreateRibbonButton();
             this.tabPandID.SuspendLayout();
             this.groupProject.SuspendLayout();
@@ -177,14 +177,6 @@
     "ipe. Possitive means up. Units are in [m]";
             this.editBoxHeight.Text = null;
             // 
-            // buttonAddPipe
-            // 
-            this.buttonAddPipe.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.buttonAddPipe.Image = global::PandIDExcelAddin.Properties.Resources.pipe;
-            this.buttonAddPipe.Label = "Add pipe";
-            this.buttonAddPipe.Name = "buttonAddPipe";
-            this.buttonAddPipe.ShowImage = true;
-            // 
             // Valves
             // 
             this.Valves.Items.Add(this.dropDownType);
@@ -197,11 +189,20 @@
             // 
             this.dropDownType.Label = "Component type";
             this.dropDownType.Name = "dropDownType";
+            this.dropDownType.SelectionChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.dropDownType_SelectionChanged);
             // 
             // dropDownComponent
             // 
             this.dropDownComponent.Label = "Component";
             this.dropDownComponent.Name = "dropDownComponent";
+            // 
+            // buttonAddPipe
+            // 
+            this.buttonAddPipe.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.buttonAddPipe.Image = global::PandIDExcelAddin.Properties.Resources.pipe;
+            this.buttonAddPipe.Label = "Add pipe";
+            this.buttonAddPipe.Name = "buttonAddPipe";
+            this.buttonAddPipe.ShowImage = true;
             // 
             // buttonAddComp
             // 

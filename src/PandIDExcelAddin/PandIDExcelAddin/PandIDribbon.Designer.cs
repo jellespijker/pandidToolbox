@@ -157,6 +157,7 @@
             // 
             this.dropDownNorm.Label = "C-Norm";
             this.dropDownNorm.Name = "dropDownNorm";
+            this.dropDownNorm.SelectionChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.dropDownNorm_SelectionChanged);
             // 
             // dropDownDia
             // 
@@ -167,7 +168,7 @@
             // 
             this.editBoxLength.Label = "Length";
             this.editBoxLength.Name = "editBoxLength";
-            this.editBoxLength.Text = null;
+            this.editBoxLength.Text = "1";
             // 
             // editBoxHeight
             // 
@@ -175,7 +176,7 @@
             this.editBoxHeight.Name = "editBoxHeight";
             this.editBoxHeight.ScreenTip = "Enter the difference in height between the start of the pipe and the end of the p" +
     "ipe. Possitive means up. Units are in [m]";
-            this.editBoxHeight.Text = null;
+            this.editBoxHeight.Text = "0";
             // 
             // Valves
             // 

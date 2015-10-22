@@ -157,6 +157,10 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="Component.cs" />
+    <Compile Include="ExHeader.cs" />
+    <Compile Include="ExProperties.cs" />
+    <Compile Include="flow.cs" />
     <Compile Include="pandidDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -168,6 +172,8 @@
     <Compile Include="PandIDribbon.Designer.cs">
       <DependentUpon>PandIDribbon.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pipe.cs" />
+    <Compile Include="PipeBlock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -185,12 +191,12 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="pandidDataSet.xsc">
       <DependentUpon>pandidDataSet.xsd</DependentUpon>
     </None>
     <None Include="pandidDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>pandidDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="pandidDataSet.xss">

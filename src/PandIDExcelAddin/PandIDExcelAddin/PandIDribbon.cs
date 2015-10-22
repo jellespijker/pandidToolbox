@@ -5,11 +5,14 @@ using System.Text;
 using Microsoft.Office.Tools.Ribbon;
 using MySql.Data.MySqlClient;
 using System.Globalization;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace PandIDExcelAddin
 {
     public partial class PandIDribbon
     {
+        private ExHeader SheetHeader { get; set; }
+
         private void PandIDribbon_Load(object sender, RibbonUIEventArgs e)
         {
             //fill the various fields from the SQL database
@@ -22,6 +25,70 @@ namespace PandIDExcelAddin
             fillRibonDropDown(ref dropDownType, "SELECT DISTINCT Type FROM pandid.complookup ORDER BY Type ASC", "Type");
             fillRibonDropDown(ref dropDownNorm, "SELECT DISTINCT norm FROM pandid.pipes ORDER BY norm ASC", "norm");
             dropDownNorm_SelectionChanged(dropDownNorm, null);
+            GetBlocks();
+        }
+
+        private void BuildHeader()
+        {
+            SheetHeader = new ExHeader();
+            SheetHeader.Number = dropDownProject.SelectedItem.Label;
+            SheetHeader.Title = dropDownDiagrams.SelectedItem.Label;
+
+            using (var connection = new MySqlConnection(Properties.Settings.Default.pandidConnectionString))
+            {
+                connection.Open();
+                using (var command = new MySqlCommand("SELECT * FROM projects WHERE number=" + dropDownProject.SelectedItem.Label, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        //Iterate through the rows and add it to the combobox's items
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                try
+                                {
+                                    SheetHeader.Name = reader.GetString("name");
+                                    SheetHeader.Customer = reader.GetString("customer");
+                                    SheetHeader.ClassSoc = reader.GetString("classsoc");
+                                    SheetHeader.L = reader.GetFloat("length");
+                                    SheetHeader.W = reader.GetFloat("width");
+                                    SheetHeader.D = reader.GetFloat("depth");
+                                }
+                                catch (System.Data.SqlTypes.SqlNullValueException ex)
+                                {
+                                    //item.Label = "None";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void GetBlocks()
+        {
+            BuildHeader();
+        }
+
+        private void ClearSheet()
+        {
+            // Clear sheet
+            Excel.Application ExApp = Globals.ThisAddIn.Application as Excel.Application;
+            Excel._Worksheet ExSheet = ExApp.ActiveSheet as Excel._Worksheet;
+
+            //find the complete range
+            Excel.Range first = ExSheet.Cells[1, 1];
+            Excel.Range last = ExSheet.Cells.SpecialCells(Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
+            Excel.Range workRange = ExSheet.get_Range(first, last);
+            workRange.Value = "";
+            workRange.ClearFormats();
+        }
+
+        private void RebuildSheet()
+        {
+            ClearSheet();
+
         }
 
         private void fillRibonDropDown(ref RibbonDropDown rbControl, string query, string col)
@@ -83,6 +150,8 @@ namespace PandIDExcelAddin
             RibbonDropDownItem selectedItem = rb.SelectedItem;
             fillLabel(ref labelCustomer, "SELECT customer FROM projects where number=" + selectedItem.Label);
             fillLabel(ref labelClass, "SELECT classsoc FROM projects where number=" + selectedItem.Label);
+
+            BuildHeader();
         }
 
         private void dropDownDiagrams_SelectionChanged(object sender, RibbonControlEventArgs e)
@@ -114,6 +183,8 @@ namespace PandIDExcelAddin
                     }
                 }
             }
+
+            BuildHeader();
         }
 
         private string getFirstValue(string sqlSearch)
@@ -183,6 +254,12 @@ namespace PandIDExcelAddin
             {
                 fillRibonDropDown(ref dropDownDia, "SELECT DISTINCT outdia FROM pandid.pipes WHERE norm LIKE \'" + searchstr + "%\' ORDER BY dn ASC", "outdia");
             }
+        }
+
+        private void buttonAddPipe_Click(object sender, RibbonControlEventArgs e)
+        {
+            RebuildSheet();
+            SheetHeader.WriteToExcel();
         }
     }
 }

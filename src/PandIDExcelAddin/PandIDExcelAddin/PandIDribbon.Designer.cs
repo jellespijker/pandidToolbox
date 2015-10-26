@@ -204,6 +204,7 @@
             this.buttonAddPipe.Label = "Add pipe";
             this.buttonAddPipe.Name = "buttonAddPipe";
             this.buttonAddPipe.ShowImage = true;
+            this.buttonAddPipe.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonAddPipe_Click);
             // 
             // buttonAddComp
             // 

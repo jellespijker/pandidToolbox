@@ -33,5 +33,86 @@ namespace PandIDExcelAddin.Properties {
                 return ((string)(this["pandidConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100, 255, 224, 192")]
+        public global::System.Drawing.Color BackgroundColorMain {
+            get {
+                return ((global::System.Drawing.Color)(this["BackgroundColorMain"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("18")]
+        public int TitleFontSize {
+            get {
+                return ((int)(this["TitleFontSize"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("14")]
+        public int SubTitleFontSize {
+            get {
+                return ((int)(this["SubTitleFontSize"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool TitleFontBold {
+            get {
+                return ((bool)(this["TitleFontBold"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public string SubTitleBold {
+            get {
+                return ((string)(this["SubTitleBold"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("255, 192, 128")]
+        public global::System.Drawing.Color BorderColorBlock {
+            get {
+                return ((global::System.Drawing.Color)(this["BorderColorBlock"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("255, 128, 0")]
+        public global::System.Drawing.Color BorderColorMain {
+            get {
+                return ((global::System.Drawing.Color)(this["BorderColorMain"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Arial, 8.25pt")]
+        public global::System.Drawing.Font BasicFont {
+            get {
+                return ((global::System.Drawing.Font)(this["BasicFont"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int BasicFontSize {
+            get {
+                return ((int)(this["BasicFontSize"]));
+            }
+        }
     }
 }

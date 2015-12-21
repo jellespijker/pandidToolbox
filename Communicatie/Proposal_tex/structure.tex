@@ -1,0 +1,85 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% IHC Latex standard
+% Structural Definitions File
+% Version 1.0 (5/10/15)
+%
+% Original author:
+% Jelle Spijker (j.spijker@ihcmerwede.com)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+% VARIOUS REQUIRED PACKAGES AND CONFIGURATIONS 
+%----------------------------------------------------------------------------------------
+
+\usepackage[top=3.5cm,bottom=3.75cm,left=3cm,headsep=10pt,a4paper]{geometry} % page margins
+
+\usepackage{graphicx} % including pictures
+\graphicspath{{Pictures/}}
+
+\usepackage{tikz} %drawing custom shapes
+\usetikzlibrary{shapes, arrows}
+
+\usepackage[english]{babel}
+
+\usepackage{enumitem}
+
+\usepackage{lipsum}
+
+\usepackage[nochapter,tocentry]{vhistory}
+
+%----------------------------------------------------------------------------------------
+%	Header
+%----------------------------------------------------------------------------------------
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage[odd]{emptypage}
+
+\usepackage{etoolbox}
+\patchcmd{\chapter}{\thispagestyle{plain}}{\thispagestyle{fancy}}{}{}
+
+\fancyhead{}
+\fancyhead[LO,LE]{\includegraphics[width=3cm]{Logo.png}}
+\fancyfoot[LO,LE]{\includegraphics[width=6cm]{Mission.png}}
+\fancyfoot[RO, RE]{\includegraphics[width=7cm]{Copyright.png}}
+%
+%\makeatletter
+%\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+%	\hbox{}
+%	\thispagestyle{plain}
+%	\newpage
+%	\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+%\makeatother \clearpage{\pagestyle{plain}\cleardoublepage}
+
+%----------------------------------------------------------------------------------------
+%	Colors
+%----------------------------------------------------------------------------------------
+
+\usepackage{xcolor} % Required for specifying colors by name
+\definecolor{ocre}{RGB}{243,0,0} 
+
+%----------------------------------------------------------------------------------------
+%	Fonts
+%----------------------------------------------------------------------------------------
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{titlesec}
+\usepackage{etoolbox}
+\usepackage{lipsum}
+
+\setcounter{secnumdepth}{5}
+\renewcommand\thesection{\arabic{section}}
+
+%----------------------------------------------------------------------------------------
+%	Chapter format
+%----------------------------------------------------------------------------------------
+
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}{\MakeUppercase{\chaptertitlename}\ \thechapter}{5pt}{\Huge}
+\titlespacing{\chapter}{0pt}{*0}{*5}
+
+%----------------------------------------------------------------------------------------
+%	REMARK ENVIRONMENT
+%----------------------------------------------------------------------------------------
